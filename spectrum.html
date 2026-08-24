@@ -441,6 +441,19 @@ button.pstat:hover{color:var(--ink)}
   </nav>
   <div class="tright">
     <button class="searchpill" id="palBtn"><svg class="i"><use href="#i-search"/></svg><span class="txt">Search anything</span><span class="kc">&#8984;K</span></button>
+    <div class="thememenu">
+      <button class="ibtn" id="themeBtn" title="Theme" aria-haspopup="true" aria-expanded="false"><span class="tdot"></span></button>
+      <div class="tmenu" id="tMenu" hidden>
+        <div class="lbl">Theme</div>
+        <button data-pick="coral"><span class="d" style="background:#E85D4A"></span>Coral<span class="ck">&#10003;</span></button>
+        <button data-pick="amber"><span class="d" style="background:#D99A0B"></span>Amber<span class="ck">&#10003;</span></button>
+        <button data-pick="emerald"><span class="d" style="background:#12A06E"></span>Emerald<span class="ck">&#10003;</span></button>
+        <button data-pick="teal"><span class="d" style="background:#11929B"></span>Teal<span class="ck">&#10003;</span></button>
+        <button data-pick="azure"><span class="d" style="background:#2276DB"></span>Azure<span class="ck">&#10003;</span></button>
+        <button data-pick="violet"><span class="d" style="background:#7C5CE0"></span>Violet<span class="ck">&#10003;</span></button>
+        <button data-pick="rose"><span class="d" style="background:#D6447C"></span>Rose<span class="ck">&#10003;</span></button>
+      </div>
+    </div>
     <button class="ibtn" id="modeBtn" title="Toggle dark mode"><svg class="i"><use href="#i-sun"/></svg></button>
     <button class="ibtn" id="adminBtn" title="Admin"><svg class="i"><use href="#i-shield"/></svg></button>
     <div class="usermenu">
@@ -1522,6 +1535,41 @@ html[data-mode="dark"] .o2{opacity:.1}
   color:#fff;box-shadow:0 18px 60px rgba(124,92,224,.35)}
 #intro .itag{letter-spacing:.34em}
 
+
+/* ================= SPECTRUM LAYER IV: one theme, every page ================= */
+/* a chosen theme overrides the per-section hues everywhere */
+html[data-theme="coral"]{--sec:#E85D4A;--secSoft:#FBE9E5;--secInk:#B3402F;--secDeep:#7A2416;--sec2:#D6447C}
+html[data-theme="amber"]{--sec:#D99A0B;--secSoft:#FBF2DB;--secInk:#9A6C00;--secDeep:#6E4A00;--sec2:#E85D4A}
+html[data-theme="emerald"]{--sec:#12A06E;--secSoft:#E0F4EB;--secInk:#0B7A50;--secDeep:#0A5C40;--sec2:#2276DB}
+html[data-theme="teal"]{--sec:#11929B;--secSoft:#E1F3F5;--secInk:#0B6E75;--secDeep:#084F55;--sec2:#2276DB}
+html[data-theme="azure"]{--sec:#2276DB;--secSoft:#E7F0FC;--secInk:#1259AC;--secDeep:#123E78;--sec2:#12A06E}
+html[data-theme="violet"]{--sec:#7C5CE0;--secSoft:#EEE9FC;--secInk:#5D3FC4;--secDeep:#3E2A8F;--sec2:#D6447C}
+html[data-theme="rose"]{--sec:#D6447C;--secSoft:#FBE7F0;--secInk:#AD2A5E;--secDeep:#7E1B45;--sec2:#7C5CE0}
+html[data-mode="dark"][data-theme="coral"]{--secSoft:#33201B;--secInk:#FF8A73}
+html[data-mode="dark"][data-theme="amber"]{--secSoft:#2E2510;--secInk:#F2BE4E}
+html[data-mode="dark"][data-theme="emerald"]{--secSoft:#122B21;--secInk:#4FD6A2}
+html[data-mode="dark"][data-theme="teal"]{--secSoft:#0F2A2D;--secInk:#54C6CF}
+html[data-mode="dark"][data-theme="azure"]{--secSoft:#14243A;--secInk:#77ABF2}
+html[data-mode="dark"][data-theme="violet"]{--secSoft:#241D3E;--secInk:#A78BFA}
+html[data-mode="dark"][data-theme="rose"]{--secSoft:#331523;--secInk:#F27AA8}
+
+/* the theme dropdown in the dock */
+.thememenu{position:relative}
+.tdot{width:17px;height:17px;border-radius:50%;display:block;
+  background:conic-gradient(from 40deg,var(--sec),var(--sec2),var(--sec));border:2px solid rgba(255,255,255,.75)}
+.tmenu{position:absolute;right:0;top:48px;width:192px;padding:7px;border-radius:14px;z-index:60;
+  background:var(--card);border:1px solid var(--border);box-shadow:0 18px 50px rgba(18,21,27,.2)}
+.tmenu[hidden]{display:none}
+.tmenu .lbl{font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--faint);
+  padding:6px 11px 5px;text-transform:uppercase}
+.tmenu button{display:flex;align-items:center;gap:10px;width:100%;padding:9px 11px;border-radius:9px;
+  font-weight:700;font-size:13.5px;color:var(--ink);text-align:left}
+.tmenu button:hover{background:var(--canvas)}
+.tmenu button.on{background:var(--secSoft);color:var(--secInk)}
+.tmenu .d{width:14px;height:14px;border-radius:50%;flex:none}
+.tmenu button .ck{margin-left:auto;font-size:12px;color:var(--secInk);opacity:0}
+.tmenu button.on .ck{opacity:1}
+
 </style>
 <div id="intro" aria-hidden="true"><div class="iwrap"><div class="imark">N</div><div class="iname">nation<i>.dev</i></div><div class="itag">A GLOBAL TECH ECOSYSTEM</div></div></div>
 <div id="curtain" aria-hidden="true"></div>
@@ -2128,5 +2176,38 @@ animatePage($('.page.on'));
 })();
 </script>
 
+<script>
+(function(){
+  var THEMES = ['coral','amber','emerald','teal','azure','violet','rose'];
+  var btn = document.getElementById('themeBtn'), menu = document.getElementById('tMenu');
+  if (!btn || !menu) return;
+  function setTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    try { localStorage.setItem('nation-theme', t); } catch (e) {}
+    Array.prototype.forEach.call(menu.querySelectorAll('[data-pick]'), function(b){
+      b.classList.toggle('on', b.getAttribute('data-pick') === t);
+    });
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('nation-theme'); } catch (e) {}
+  setTheme(THEMES.indexOf(saved) >= 0 ? saved : 'coral');
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    menu.hidden = !menu.hidden;
+    btn.setAttribute('aria-expanded', String(!menu.hidden));
+  });
+  menu.addEventListener('click', function(e){
+    var b = e.target.closest('[data-pick]');
+    if (!b) return;
+    setTheme(b.getAttribute('data-pick'));
+    var c = document.getElementById('curtain');
+    if (c) { c.classList.remove('run'); void c.offsetWidth; c.classList.add('run'); }
+  });
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.thememenu')) { menu.hidden = true; btn.setAttribute('aria-expanded','false'); }
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') menu.hidden = true; });
+})();
+</script>
 </body>
 </html>
