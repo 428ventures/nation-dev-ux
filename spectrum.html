@@ -452,6 +452,7 @@ button.pstat:hover{color:var(--ink)}
         <button data-pick="azure"><span class="d" style="background:#2276DB"></span>Azure<span class="ck">&#10003;</span></button>
         <button data-pick="violet"><span class="d" style="background:#7C5CE0"></span>Violet<span class="ck">&#10003;</span></button>
         <button data-pick="rose"><span class="d" style="background:#D6447C"></span>Rose<span class="ck">&#10003;</span></button>
+        <button data-pick="crimson"><span class="d" style="background:#C2402F"></span>Crimson<span class="ck">&#10003;</span></button>
       </div>
     </div>
     <button class="ibtn" id="modeBtn" title="Toggle dark mode"><svg class="i"><use href="#i-sun"/></svg></button>
@@ -1474,7 +1475,7 @@ html[data-sec="admin"]{--secDeep:#6E1F14;--sec2:#D99A0B}
 
 /* the ecosystem strip: all seven worlds, always present */
 #spectrum{position:fixed;top:0;left:0;right:0;height:4px;z-index:130;
-  background:linear-gradient(90deg,#E85D4A,#D99A0B,#12A06E,#11929B,#2276DB,#7C5CE0,#D6447C)}
+  background:linear-gradient(90deg,#C2402F,#E85D4A,#D99A0B,#12A06E,#11929B,#2276DB,#7C5CE0,#D6447C)}
 
 /* the canvas itself takes the section color */
 body{background:color-mix(in srgb,var(--sec) 7%,var(--canvas));transition:background-color .6s}
@@ -1545,6 +1546,7 @@ html[data-theme="teal"]{--sec:#11929B;--secSoft:#E1F3F5;--secInk:#0B6E75;--secDe
 html[data-theme="azure"]{--sec:#2276DB;--secSoft:#E7F0FC;--secInk:#1259AC;--secDeep:#123E78;--sec2:#12A06E}
 html[data-theme="violet"]{--sec:#7C5CE0;--secSoft:#EEE9FC;--secInk:#5D3FC4;--secDeep:#3E2A8F;--sec2:#D6447C}
 html[data-theme="rose"]{--sec:#D6447C;--secSoft:#FBE7F0;--secInk:#AD2A5E;--secDeep:#7E1B45;--sec2:#7C5CE0}
+html[data-theme="crimson"]{--sec:#C2402F;--secSoft:#FBE9E5;--secInk:#992F21;--secDeep:#6E1F14;--sec2:#D99A0B}
 html[data-mode="dark"][data-theme="coral"]{--secSoft:#33201B;--secInk:#FF8A73}
 html[data-mode="dark"][data-theme="amber"]{--secSoft:#2E2510;--secInk:#F2BE4E}
 html[data-mode="dark"][data-theme="emerald"]{--secSoft:#122B21;--secInk:#4FD6A2}
@@ -1552,6 +1554,7 @@ html[data-mode="dark"][data-theme="teal"]{--secSoft:#0F2A2D;--secInk:#54C6CF}
 html[data-mode="dark"][data-theme="azure"]{--secSoft:#14243A;--secInk:#77ABF2}
 html[data-mode="dark"][data-theme="violet"]{--secSoft:#241D3E;--secInk:#A78BFA}
 html[data-mode="dark"][data-theme="rose"]{--secSoft:#331523;--secInk:#F27AA8}
+html[data-mode="dark"][data-theme="crimson"]{--secSoft:#331813;--secInk:#F08A78}
 
 /* the theme dropdown in the dock */
 .thememenu{position:relative}
@@ -2178,7 +2181,7 @@ animatePage($('.page.on'));
 
 <script>
 (function(){
-  var THEMES = ['coral','amber','emerald','teal','azure','violet','rose'];
+  var THEMES = ['coral','amber','emerald','teal','azure','violet','rose','crimson'];
   var btn = document.getElementById('themeBtn'), menu = document.getElementById('tMenu');
   if (!btn || !menu) return;
   function setTheme(t){
