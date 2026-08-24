@@ -6,3 +6,4 @@ Interactive, self-contained UX prototypes for a skill-first tech community.
 - **Nation Air** — `/air.html` — the calm, spacious baseline.
 
 All content is fictional demo data. Single-file HTML, no build step, no dependencies.
+- **Nation Spectrum** (color worlds): `spectrum.html`
